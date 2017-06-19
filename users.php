@@ -24,42 +24,30 @@
     </ul>
   </div>
 </nav>
+    <div class="container">
+    	 <div class="row">
+    	 	<h3> Users </h3>
 
-<?php 
-session_start();
+        <?php
 
-require('connection.php');
+        require('connection.php');
 
+        $query = "SELECT username FROM users";
 
- 
-  $username = mysqli_real_escape_string($connect, $_POST['username']);
-  $password = mysqli_real_escape_string($connect, $_POST['password']);
+        $result = mysqli_query($connect, $query);
 
-  $query = "SELECT * FROM `users` where username = '$username' and password = '" . md5($password). " ' ";
+        if(mysqli_num_rows($result) > 0){
 
-  $result = mysqli_query($connect, $query);
+          while($row = mysqli_fetch_assoc($result)) {
 
-  $count = mysqli_num_rows($result);
+           echo "<li> " .$row["username"]. "</li>" ; 
+          } 
+        }else {
+         echo "No User yet to register";
+           }
+          ?>
 
-  if($count==1){
-
-   $_SESSION['login_user'] = $username;
-
-   header("location: dashboard.php");
-
-  }  else {
-    	$error = '<div class="alert alert-success" role="alert">Invalid username or password</div>';
-
-    	echo $error;
-    }
-
-?>
-
-</body>
-</html>
-
-
-
-
-
-
+        </div>
+      </div>
+    </body>
+    </html>

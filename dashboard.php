@@ -31,8 +31,9 @@ include('session.php');
   <div class="container">
        <div class="row">
         <h3> Welcome <?php echo "$username" ; ?> </h3>
-
-        <button class="btn btn-danger" href="logout.php">Logout</button>
+         <a href="logout.php">
+        <button class="btn btn-danger">Logout</button>
+      </a>
 </div>
 </div>
 
