@@ -1,39 +1,37 @@
 <?php 
+session_start();
 
 require('connection.php');
 
-session_start();
 
-if($_SERVER["REQUEST_METHOD"] =="POST" ){
  
-  $username = mysqli_real_escape_string($db_name, $_POST['username']);
-  $password = mysqli_real_escape_string($db_name, $_POST['password']);
+  $username = mysqli_real_escape_string($connect, $_POST['username']);
+  $password = mysqli_real_escape_string($connect, $_POST['password']);
 
-  $query = "SELECT id FROM users where username = '$username' and password = '$password'"
+  $query = "SELECT * FROM `users` where username = '$username' and password = '" . md5($password). " ' ";
 
-  $result = mysqli_query($db_name, $query);
-
-  $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-
-  $active = $row['active'];
+  $result = mysqli_query($connect, $query);
 
   $count = mysqli_num_rows($result);
 
-  if($count == 1){
-    session_register("username");
+  if($count==1){
 
-    $_SESSION['login_user'] = $username;
+   $_SESSION['login_user'] = $username;
 
-    header("location: dashboard.php");
+   echo $_SESSION['login_user']; 
+   //header("location: dashboard.php");
 
-    else {
-    	$error = '<div class="alert alert-success" role="alert">Invalid username or password</div>'
+  }  else {
+    	$error = '<div class="alert alert-success" role="alert">Invalid username or password</div>';
+
+    	echo $error;
     }
 
-  }
 
 
-}
+
+
+?>
 
 
 
