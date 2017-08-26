@@ -1,4 +1,5 @@
-<?php include('userconnection.php');
+<?php
+include('userconnection.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,10 +15,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
-	<nav class="navbar navbar-default">
+  <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="dashboard.php">Preod</a>
+      <a class="navbar-brand" href="">Preod</a>
     </div>
     <ul class="nav navbar-nav">
     <li><a href="create_post.php">Create Post</a></li>
@@ -26,12 +27,24 @@
     </ul>
   </div>
 </nav>
-  <div class="container">
-       <div class="row">
-        <h3> Welcome <?php echo "$username" ; ?> </h3>
-</div>
-</div>
 
 
+<?php 
+require("connection.php");
+ 
+$id = $_GET['id'];
+
+$query = "DELETE FROM posts WHERE id = $id";
+
+if(mysqli_query($connect, $query)) {
+   $result = '<div class="alert alert-success" role="alert">Post deleted Successfully</div>';
+
+   echo $result;
+
+
+} else {
+  echo "Error :" .$query . "</br>" .mysqli_error($connect);
+}
+?>
 </body>
 </html>

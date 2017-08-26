@@ -1,3 +1,5 @@
+<?php include('userconnection.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,14 +14,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
-	<nav class="navbar navbar-default">
+  <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="">Preod</a>
+      <a class="navbar-brand" href="dashboard.php">Preod</a>
     </div>
     <ul class="nav navbar-nav">
-    <li><a href="createpost.html">Create Post</a></li>
-    <li><a href="viewpost.php">View all Posts</a></li>
+    <li><a href="create_post.php">Create Post</a></li>
+    <li><a href="viewpost.php?id=<?php echo $row['id']; ?>">View all Posts</a></li>
     <li><a href="logout.php"><button class="btn btn-danger">Logout</button></a></li>
     </ul>
   </div>
@@ -43,7 +45,7 @@ $row = mysqli_fetch_assoc($result);
        <div class="row">
         <h3>Update Post</h3>
         <div class="col-lg-6">
-            <form class="form-vertical" role="form" method="post" action="updatepost.php">
+            <form class="form-vertical" role="form" method="post" action="updatepost.php?id=<?php echo $row['id']; ?>">
                   <div class="form-group">
                  <label for="username" class="control-label">Title</label>
                  <input type="text" name="title" class="form-control" id="username" value="<?php echo $row['title'];?>" required>

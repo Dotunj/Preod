@@ -1,3 +1,5 @@
+<?php include('userconnection.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,11 +17,11 @@
   <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="">Preod</a>
+      <a class="navbar-brand" href="dashboard.php">Preod</a>
     </div>
     <ul class="nav navbar-nav">
-    <li><a href="createpost.html">Create Post</a></li>
-    <li><a href="viewpost.php">View all Posts</a></li>
+    <li><a href="create_post.php">Create Post</a></li>
+    <li><a href="viewpost.php?id=<?php echo $row['id']; ?>">View all Posts</a></li>
     <li><a href="logout.php"><button class="btn btn-danger">Logout</button></a></li>
     </ul>
   </div>

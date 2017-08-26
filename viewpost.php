@@ -1,3 +1,5 @@
+<?php include('userconnection.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,14 +14,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
-	<nav class="navbar navbar-default">
+  <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="">Preod</a>
+      <a class="navbar-brand" href="dashboard.php">Preod</a>
     </div>
     <ul class="nav navbar-nav">
-    <li><a href="createpost.html">Create Post</a></li>
-    <li><a href="viewpost.html">View all Posts</a></li>
+    <li><a href="create_post.php">Create Post</a></li>
+    <li><a href="viewpost.php?id=<?php echo $row['id']; ?>">View all Posts</a></li>
     <li><a href="logout.php"><button class="btn btn-danger">Logout</button></a></li>
     </ul>
   </div>
@@ -29,7 +31,6 @@
 <table class="table table-bordered">
 <thead>
 <tr>
- <th> S/N </th>
  <th> Title </th>
  <th> Content </th>
  <th colspan="3">Operations</th>
@@ -37,8 +38,6 @@
  </thead>
  <tbody>
 <?php
-
-include("session.php");
 
 require("connection.php");
 
@@ -51,12 +50,11 @@ $result = mysqli_query($connect, $query);
 if(mysqli_num_rows($result) > 0){
     while($row = mysqli_fetch_assoc($result)){
     echo '<tr>';
-    echo "<td>".$row["id"]. "</td>";
     echo "<td>".$row["title"]. "</td>";
     echo "<td>".$row["content"]. "</td>";
     echo '<td><a class="btn btn-primary" href="readpost.php?id='.$row['id'].'">Read</a></td>';
     echo '<td><a class="btn btn-success" href="update_post.php?id='.$row['id'].'">Update</a></td>';
-    echo '<td><a class="btn btn-danger" href="read_post.php?id='.$row['id'].'">Delete</a></td>';
+    echo '<td><a class="btn btn-danger" href="deletepost.php?id='.$row['id'].'">Delete</a></td>';
     echo '</tr>';
     }
 } else {
