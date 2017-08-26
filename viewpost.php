@@ -19,23 +19,47 @@
     </div>
     <ul class="nav navbar-nav">
     <li><a href="createpost.html">Create Post</a></li>
-    <li><a href="viewpost.php">View all Posts</a></li>
+    <li><a href="viewpost.html">View all Posts</a></li>
     <li><a href="logout.php"><button class="btn btn-danger">Logout</button></a></li>
     </ul>
   </div>
 </nav>
 
+<div class="container">
+<table class="table table-bordered">
+<thead>
+<tr>
+ <th> S/N </th>
+ <th> Title </th>
+ <th> Content </th>
+ <th></th>
+ </tr>
+ </thead>
+ <tbody>
 <?php
 
-include('session.php');
+require("connection.php");
+
+$query = "SELECT * FROM posts";
+
+$result = mysqli_query($connect, $query);
+
+if(mysqli_num_rows($result) > 0){
+    while($row = mysqli_fetch_assoc($result)){
+    echo '<tr>';
+    echo "<td>".$row["id"]. "</td>";
+    echo "<td>".$row["title"]. "</td>";
+    echo "<td>".$row["content"]. "</td>";
+    echo '<td><a class="btn btn-primary" href="read.php?id='.$row['id'].'">Read</a></td>';
+    echo '</tr>';
+    }
+} else {
+    echo "No posts yet";
+}
 ?>
-
-  <div class="container">
-       <div class="row">
-        <h3> Welcome <?php echo "$username" ; ?> </h3>
-</div>
-</div>
-
-
-</body>
-</html>
+ </tbody>
+ </table>
+ </div>
+ </body>
+ </html>
+ 
