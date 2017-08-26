@@ -1,6 +1,3 @@
-<?php include('session.php');
-include('userconnection.php');
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,17 +19,33 @@ include('userconnection.php');
     </div>
     <ul class="nav navbar-nav">
     <li><a href="createpost.html">Create Post</a></li>
-    <li><a href="viewpost.php?id=<?php echo $row['id']; ?>">View all Posts</a></li>
+    <li><a href="viewpost.php">View all Posts</a></li>
     <li><a href="logout.php"><button class="btn btn-danger">Logout</button></a></li>
     </ul>
   </div>
 </nav>
-  <div class="container">
-       <div class="row">
-        <h3> Welcome <?php echo "$username" ; ?> </h3>
-</div>
-</div>
 
+<?php
+
+require("connection.php");
+
+$id= $_GET['id'];
+
+$query= "SELECT * FROM posts WHERE id= $id";
+
+$result = mysqli_query($connect, $query);
+
+$row = mysqli_fetch_assoc($result);
+
+?>
+
+     <div class="container">
+       <div class="row">
+        <h1><?php echo $row['title'];?></h1>
+        <div class="col-lg-6">
+          <p><?php echo $row['content'];?></p>
+          </div>
+        </div>
 
 </body>
 </html>

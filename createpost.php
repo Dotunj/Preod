@@ -19,7 +19,7 @@
     </div>
     <ul class="nav navbar-nav">
     <li><a href="createpost.html">Create Post</a></li>
-    <li><a href="viewpost.html">View all Posts</a></li>
+    <li><a href="viewpost.php">View all Posts</a></li>
     <li><a href="logout.php"><button class="btn btn-danger">Logout</button></a></li>
     </ul>
   </div>
@@ -29,11 +29,13 @@
 
 require("connection.php");
 
+$id= $_GET['id'];
+
 $title = $_POST['title'];
 
 $content = $_POST['content'];
 
-$data = "INSERT INTO posts(title, content) VALUES('$title', '$content')";
+$data = "INSERT INTO posts(title, content, user_id) VALUES('$title', '$content', '$id')";
 
 if(mysqli_query($connect, $data)) {
    $result = '<div class="alert alert-success" role="alert">Post created Successfully</div>';

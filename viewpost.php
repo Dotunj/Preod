@@ -32,15 +32,19 @@
  <th> S/N </th>
  <th> Title </th>
  <th> Content </th>
- <th></th>
+ <th colspan="3">Operations</th>
  </tr>
  </thead>
  <tbody>
 <?php
 
+include("session.php");
+
 require("connection.php");
 
-$query = "SELECT * FROM posts";
+$user_id = $_GET['id'];
+
+$query = "SELECT * FROM posts WHERE user_id = '$user_id' ";
 
 $result = mysqli_query($connect, $query);
 
@@ -50,7 +54,9 @@ if(mysqli_num_rows($result) > 0){
     echo "<td>".$row["id"]. "</td>";
     echo "<td>".$row["title"]. "</td>";
     echo "<td>".$row["content"]. "</td>";
-    echo '<td><a class="btn btn-primary" href="read.php?id='.$row['id'].'">Read</a></td>';
+    echo '<td><a class="btn btn-primary" href="readpost.php?id='.$row['id'].'">Read</a></td>';
+    echo '<td><a class="btn btn-success" href="update_post.php?id='.$row['id'].'">Update</a></td>';
+    echo '<td><a class="btn btn-danger" href="read_post.php?id='.$row['id'].'">Delete</a></td>';
     echo '</tr>';
     }
 } else {

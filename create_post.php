@@ -1,3 +1,4 @@
+<?php include("userconnection.php"); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,23 +19,17 @@
       <a class="navbar-brand" href="">Preod</a>
     </div>
     <ul class="nav navbar-nav">
-    <li><a href="createpost.html">Create Post</a></li>
-    <li><a href="viewpost.html">View all Posts</a></li>
+    <li><a href="create_post.php">Create Post</a></li>
+    <li><a href="viewpost.php">View all Posts</a></li>
     <li><a href="logout.php"><button class="btn btn-danger">Logout</button></a></li>
     </ul>
   </div>
 </nav>
-
-<?php
-
-include('session.php');
-?>
-
      <div class="container">
        <div class="row">
         <h3>Create Post</h3>
         <div class="col-lg-6">
-            <form class="form-vertical" role="form" method="post" action="createpost.php">
+    <form class="form-vertical" role="form" method="post" action="createpost.php?id=<?php echo $row['id']; ?>">
                   <div class="form-group">
                  <label for="username" class="control-label">Title</label>
                  <input type="text" name="title" class="form-control" id="username" required>
